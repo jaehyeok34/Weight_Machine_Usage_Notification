@@ -5,7 +5,7 @@ class Repository:
             sensor      :   str     =   None,
             signal      :   bool    =   None,
             value       :   float   =   None,
-            saveTime    :   str =   None,
+            saveTime    :   str     =   None,
     ) -> None:
         self.id         =   id
         self.sensor     =   sensor
