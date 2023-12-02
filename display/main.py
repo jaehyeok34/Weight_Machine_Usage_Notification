@@ -7,7 +7,16 @@ if __name__ == '__main__':
     sys.path.append(os.path.abspath(os.getcwd()))
     app = QApplication(sys.argv)
 
-    window = WindowWidget()
-   
-    window.show()
+
+    window = WindowWidget(
+        winsize         =   (100, 100, 400, 400),
+        title           =   "display",
+        winbackColor    =   "black",
+        text            =   "Hello World",
+        textColor       =   "white",
+        fontSize        =   30,
+        radius          =   30,
+    )
+    window.showMaximized()
+
     sys.exit(app.exec_())
