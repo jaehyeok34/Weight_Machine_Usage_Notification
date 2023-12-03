@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
+from PyQt5.QtWidgets    import *
+from PyQt5.QtGui        import *
 
 class CircleWidget(QWidget):
     def __init__(
@@ -13,11 +13,11 @@ class CircleWidget(QWidget):
     ) -> None:
         super().__init__(parent)
 
-        self.__radius           =   radius
-        self.__circleColor      =   circleColor
-        self.__text             =   text
-        self.__textColor        =   textColor
-        self.__fontSize         =   fontSize
+        self.__radius           = radius
+        self.__circleColor      = circleColor
+        self.__text             = text
+        self.__textColor        = textColor
+        self.__fontSize         = fontSize
 
     def paintEvent(self, event):
         painter = QPainter(self)

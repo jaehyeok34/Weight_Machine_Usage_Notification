@@ -6,8 +6,8 @@ class DisplayInfo:
     
     def __init__(
         self,
-        machineName: str,
-        status: "DisplayInfo.Status",
+         id: int, name: str, status: "DisplayInfo.Status"
     ) -> None:
-        self.machineName    =   machineName
-        self.status         =   status
+        self.id     = id
+        self.name   = name
+        self.status = status
