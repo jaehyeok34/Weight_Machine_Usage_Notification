@@ -12,6 +12,7 @@ if __name__ == '__main__':
         winsize         =   (100, 100, 400, 400),
         title           =   "display",
         winbackColor    =   "black",
+        updateTime      =   3000,
         text            =   "Hello World",
         textColor       =   "white",
         fontSize        =   30,

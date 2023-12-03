@@ -11,7 +11,7 @@ class WindowWidget(QWidget):
     def __init__(
             self,
             # for window widget
-            winsize: tuple, title: str, winbackColor: str,
+            winsize: tuple, title: str, winbackColor: str, updateTime: int,
 
             # for text widget & text of status widget
             text: str, textColor: str, fontSize: int,  
@@ -39,8 +39,7 @@ class WindowWidget(QWidget):
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.updateWindow)
-        self.timer.start(5000)
-
+        self.timer.start(updateTime)
 
     def __initWindow(self, size: tuple, title: str, backColor: str) -> None:
         self.setGeometry(*size)                                 # display 크기 설정
