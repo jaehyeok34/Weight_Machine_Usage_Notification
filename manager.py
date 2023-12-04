@@ -1,15 +1,18 @@
 import sys
+import RPi.GPIO as GPIO
 
 from PyQt5.QtWidgets        import QApplication
 from display.window_widget  import WindowWidget
 from display.display_args   import DisplayArgs
-from display.display_info   import DisplayInfo
+
+from machine                import Machine
+from threading              import Thread
 
 class Manager:
     def __init__(self, displayArgs: DisplayArgs) -> None:
-        self.__machines: list[DisplayInfo] = [
-            DisplayInfo(id=3, name="벤치프레스", status=DisplayInfo.Status.USE),
-            DisplayInfo(id=2, name="랫풀다운", status=DisplayInfo.Status.END),
+        self.__machines: list[Machine] = [
+            Machine("랫풀다운", 1, 0, 0, 0, 0, 0, 0, 0),
+            Machine("스미스머신", 2, 0, 0, 0, 0, 0, 0, 0)
         ]
         self.__app          = None
         self.__display      = None
@@ -23,11 +26,19 @@ class Manager:
             args        = displayArgs,
         )
 
-    def showDisplay(self) -> None:
+    def showDisplay(self, fullScreen: bool = False) -> None:
         if self.__display is not None:
-            self.__display.showMaximized()
+            if fullScreen:
+                self.__display.showFullScreen()
+            else:
+                self.__display.showMaximized()
             sys.exit(self.__app.exec_())
 
-    def createMachine(self, machine: DisplayInfo) -> None:
-        # TODO: Exercise 객체 생성 루틴...
+    def appendMachine(self, machine: Machine) -> Thread:
+
         self.__machines.append(machine)
+        thread = Thread(target  =   machine.run)
+        thread.start()
+
+        return thread
+        

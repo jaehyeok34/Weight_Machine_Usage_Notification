@@ -7,9 +7,12 @@ from display.display_args   import DisplayArgs
 from display.display_info   import DisplayInfo
 from display.palette        import Palette
 
+from machine                import Machine
+from copy                   import deepcopy
+
 class WindowWidget(QWidget):
     def __init__(
-            self, machines: list[DisplayInfo], args: DisplayArgs
+            self, machines: list[Machine], args: DisplayArgs
     ) -> None:
         super().__init__()
 
@@ -30,7 +33,7 @@ class WindowWidget(QWidget):
             self, args.text, args.textColor, args.fontSize
         )
         self.__statusWidget = StatusWidget(
-            self, args.radius, Palette.getColor(args.textColor), args.fontSize
+            self, args.radius, Palette.getColor(args.textColor), 30
         )
         
         self.__layout.addWidget(self.__textWidget, 4)
@@ -49,8 +52,8 @@ class WindowWidget(QWidget):
     def updateWindow(self) -> None:
         machine = self.__machines[self.__index]
         self.__textWidget.updateText(
-            f"{machine.id}번 {machine.name} {StatusWidget.STATUS[machine.status]}"
+            f"{machine.id}번 {machine.name} {StatusWidget.STATUS[machine.getStatus()]}"
         )
-        self.__statusWidget.updateStatus(machine.status)
+        self.__statusWidget.updateStatus(machine.getStatus())
 
         self.__index = (self.__index + 1) % len(self.__machines)
